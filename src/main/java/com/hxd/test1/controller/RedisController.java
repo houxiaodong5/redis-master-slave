@@ -41,6 +41,8 @@ public class RedisController {
         }
         System.out.println(jedis.get("hxd"));
         list.add(jedis.get("hxd"));
+
+        jedis.close();
        return ResponseEntity.ok(list);
 
     }
@@ -61,6 +63,7 @@ public class RedisController {
 
         }
         list.add(jedis.get("hxd"));
+        jedis.close();
         return ResponseEntity.ok(list);
     }
 
@@ -75,6 +78,8 @@ public class RedisController {
         String data = slave.get("test");
         User fromJson = YjsonUtil.fromJson(data, User.class);
         System.out.println(fromJson);
+        master.close();
+        slave.close();
         return ResponseEntity.ok(fromJson);
     }
 }
